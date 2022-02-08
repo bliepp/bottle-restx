@@ -8,17 +8,14 @@ class Resource():
     :py:meth:`API.route` decorator. A resource in REST can be
     thought of as a route whose meaning depends on the request method.
     For example: to define what should happen when requesting with
-    GET, override the :py:meth:`get` method.
+    GET, set the :py:meth:`get` method.
 
-    Endpoint arguments:
+    .. note::
 
-    A route :code:`/my/route/<value>` in :py:meth:`API.route`
-    will produce an argument :code:`value` to be passed to the endpoints.
-    
-    :param args:
-        Same as for regular bottle endpoints
-    :param kwargs:
-        Same as for regular bottle endpoints
+       A route :code:`/my/route/<value>` in :py:meth:`API.route` will
+       produce an argument :code:`value` to be passed to the endpoints
+       via their :code:`*args` parameter. The parameters
+       :code:`**kwargs` are directly passed from :py:meth:`API.route`.
     """
     
     pass
