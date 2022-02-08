@@ -56,8 +56,8 @@ class API(bottle.Bottle):
         def wrapper(cls):
             instance = cls() # acts similar to a singleton
             for method in "get", "post", "put", "delete", "patch":
-                if attr := getattr(instance, method, None):
-                    self.__bottle_route(path, method.upper(), attr, **kwargs)
+                if method_func := getattr(instance, method, None):
+                    self.__bottle_route(path, method.upper(), method_func, **kwargs)
             return cls
         
         return wrapper
