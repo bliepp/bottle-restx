@@ -1,9 +1,19 @@
 import bottle
 
 
-class API(bottle.Bottle):    
+class API(bottle.Bottle):
+    """
+    A child of :py:class:`bottle.Bottle` with members to handle
+    :py:class:`bottle_restx.Resource` classes using the decorator
+    :py:meth:`resource`.
+    """
+
     # is a decorator
     def resource(self, cls):
+        """
+        A decorator for a :py:class:`bottle_restx.Resource` class
+        to make it available at a specific route.
+        """
         __init__copy = cls.__init__
 
         def __init__(other, *args, **kwargs):
