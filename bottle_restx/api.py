@@ -10,6 +10,13 @@ class API(bottle.Bottle):
     :py:meth:`resource`.
     """
 
+    def __bottle_route(self, *args, **kwargs):
+        """
+        Get bottle's route method to make room for the resources class
+        decorator to be named route as well.
+        """
+        super().route(*args, **kwargs)
+
     def default_error_handler(self, res):
         """
         The default error handler is overriden to make the API respond
@@ -18,7 +25,7 @@ class API(bottle.Bottle):
         bottle.response.content_type = "application/json"
         return json.dumps(dict(error=res.body, status_code=res.status_code))
     
-    def resource(self, path, **kwargs):
+    def route(self, path, **kwargs):
         """
         A decorator for a :py:class:`Resource` class
         to make it available at a specific route.
@@ -30,10 +37,26 @@ class API(bottle.Bottle):
         # wrapper needed to pass arguments to decorator
         def wrapper(cls):
             instance = cls() # acts similar to a singleton
-            self.route(path, "GET", instance.get, **kwargs)
-            self.route(path, "POST", instance.post, **kwargs)
-            self.route(path, "PUT", instance.put, **kwargs)
-            self.route(path, "DELETE", instance.delete, **kwargs)
+            self.__bottle_route(path, "GET", instance.get, **kwargs)
+            self.__bottle_route(path, "POST", instance.post, **kwargs)
+            self.__bottle_route(path, "PUT", instance.put, **kwargs)
+            self.__bottle_route(path, "DELETE", instance.delete, **kwargs)
             return cls
         
         return wrapper
+
+    def mount(self, prefix, app, **kwargs):
+        '''
+        Mount an application (:class:`API` or :class:`bottle.Bottle`)
+        to a specific URL prefix. Example::
+
+            api.mount('/other/', other_api)
+
+        :param prefix: path prefix or `mount-point`. If it ends in a slash,
+            that slash is mandatory.
+        :param app: an instance of :class:`API` or :class:`bottle.Bottle`.
+        '''
+        # TODO: Check if mounted app is API, too if so: remove all
+        # swagger data since it gets merged into this app, like
+        # namespaces with flask-restx
+        return super().mount(prefix, app, **kwargs)

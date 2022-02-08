@@ -7,7 +7,6 @@ Core
 ----
 .. autoclass:: API
    :members:
-   :inherited-members:
 
 .. autoclass:: Resource
    :members:

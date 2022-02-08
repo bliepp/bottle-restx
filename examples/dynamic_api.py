@@ -11,7 +11,7 @@ import bottle
 
 app = API()
 
-@app.resource("/<id:int>")
+@app.route("/<id:int>")
 class TestResource(Resource):
     def get(self, id: int):
         return {"msg": f"This is a response to a GET request on resource {id}."}

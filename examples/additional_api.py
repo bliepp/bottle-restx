@@ -14,7 +14,7 @@ app = Bottle()
 api = API()
 app.mount("/api", api)
 
-@api.resource
+@api.route("/additional")
 class TestResource(Resource):
     def get(self):
         return {"msg": "This is a response to a GET request."}
