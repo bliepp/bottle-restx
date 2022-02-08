@@ -41,7 +41,12 @@ purpose.
     @api.resource("/my/route/<id>")
     class MyResource(Resource):
         def get(id):
-            # whatever to do with a GET request
+        ...
+        def post(id):
+        ...
+        def put(id):
+        ...
+        def delete(id):
         ...
 
 The individual methods are not mandatory. You might actually discard
