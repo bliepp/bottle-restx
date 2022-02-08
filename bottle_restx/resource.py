@@ -1,5 +1,7 @@
 import bottle
 
+
+
 class Resource():
     """
     This class is intended to be derived from and used with the

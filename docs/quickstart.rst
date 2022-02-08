@@ -33,27 +33,16 @@ endpoint the class gets a :code:`get` method serving this purpose.
 Using the :py:meth:`bottle_restx.API.resource` decorator serves this
 purpose.
 
-.. warning::
-
-   This pacakge is actually not production ready. Right now all
-   resources point to :code:`/test` but individual routes will
-   obviously be the number one priority.
-
 .. code-block::
 
-    from bottle_rest import API, Resource
+    from bottle_restx import API, Resource
     api = API()
     
-    @api.resource
+    @api.resource("/my/route/<id>")
     class MyResource(Resource):
-        def get(*args, **kwargs):
+        def get(id):
             # whatever to do with a GET request
-        def post(*args, **kwargs):
-            # whatever to do with a POST request
-        def put(*args, **kwargs):
-            # whatever to do with a PUT request
-        def delete(*args, **kwargs):
-            # whatever to do with a DELETE request
+        ...
 
 The individual methods are not mandatory. You might actually discard
 unwanted methods. By default they produce an 405 (Method not allowed).

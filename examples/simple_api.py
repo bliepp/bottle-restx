@@ -11,7 +11,7 @@ import bottle
 
 app = API()
 
-@app.resource
+@app.resource("/simple")
 class TestResource(Resource):
     def get(self):
         return {"msg": "This is a response to a GET request."}

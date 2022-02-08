@@ -1,4 +1,6 @@
 import bottle
+import json
+
 
 
 class API(bottle.Bottle):
@@ -8,24 +10,30 @@ class API(bottle.Bottle):
     :py:meth:`resource`.
     """
 
-    # is a decorator
-    def resource(self, cls):
+    def default_error_handler(self, res):
+        """
+        The default error handler is overriden to make the API respond
+        in :code:`application/json` content type format.
+        """
+        bottle.response.content_type = "application/json"
+        return json.dumps(dict(error=res.body, status_code=res.status_code))
+    
+    def resource(self, path, **kwargs):
         """
         A decorator for a :py:class:`bottle_restx.Resource` class
         to make it available at a specific route.
         """
-        __init__copy = cls.__init__
+        # ignore path and method keywords as they are set in the wrapper 
+        kwargs.pop("path", None)
+        kwargs.pop("method", None)
 
-        def __init__(other, *args, **kwargs):
-            # pass api object
-            __init__copy(other, self)
-
-        cls.__init__ = __init__
-
-        instance = cls()
-        self.route("/test", "GET", instance.get)
-        self.route("/test", "POST", instance.post)
-        self.route("/test", "PUT", instance.put)
-        self.route("/test", "DELETE", instance.delete)
-
-        # no need to return for this decorator since this class is never directly used
+        # wrapper needed to pass arguments to decorator
+        def wrapper(cls):
+            instance = cls() # acts similar to a singleton
+            self.route(path, "GET", instance.get, **kwargs)
+            self.route(path, "POST", instance.post, **kwargs)
+            self.route(path, "PUT", instance.put, **kwargs)
+            self.route(path, "DELETE", instance.delete, **kwargs)
+            return cls
+        
+        return wrapper
