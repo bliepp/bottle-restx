@@ -5,19 +5,39 @@
 
 Welcome to bottle-restx's documentation
 =======================================
-A simple resource based REST API extension for the bottle framework. Loosely inspired by flask-restx.
+A simple resource based REST API extension for the bottle framework.
+Loosely inspired by flask-restx.
+
+
+Installation
+============
+Right now you cannot install bottle-restx with pip. You need to
+manually copy it into your project folder or use this repo as a
+git submodule.
+
+
+Documentation
+=============
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
 	Start<self>
    quickstart
-   classes2
 
+
+API Reference
+-------------
+
+.. toctree::
+   :maxdepth: 2
+
+   api
 
 
 Indices and tables
-------------------
+==================
 
 * :ref:`genindex`
+* :ref:`modindex`
 * :ref:`search`

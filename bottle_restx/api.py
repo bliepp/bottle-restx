@@ -6,7 +6,7 @@ import json
 class API(bottle.Bottle):
     """
     A child of :py:class:`bottle.Bottle` with members to handle
-    :py:class:`bottle_restx.Resource` classes using the decorator
+    :py:class:`Resource` classes using the decorator
     :py:meth:`resource`.
     """
 
@@ -20,7 +20,7 @@ class API(bottle.Bottle):
     
     def resource(self, path, **kwargs):
         """
-        A decorator for a :py:class:`bottle_restx.Resource` class
+        A decorator for a :py:class:`Resource` class
         to make it available at a specific route.
         """
         # ignore path and method keywords as they are set in the wrapper 

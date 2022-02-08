@@ -5,14 +5,14 @@ import bottle
 class Resource():
     """
     This class is intended to be derived from and used with the
-    :py:meth:`bottle_restx.API.resource` decorator. A resource in REST
-    can be thought of as a route whose meaning depends on the request
-    method. For example: to define what should happen when requesting
-    with GET, override the :py:meth:`get` method.
+    :py:meth:`API.resource` decorator. A resource in REST can be
+    thought of as a route whose meaning depends on the request method.
+    For example: to define what should happen when requesting with
+    GET, override the :py:meth:`get` method.
 
     Endpoint arguments:
 
-    A route :code:`/my/route/<value>` in :py:meth:bottle_restx.Api.resource
+    A route :code:`/my/route/<value>` in :py:meth:Api.resource
     will produce an argument :code:`value` to be passed to the endpoints.
     
     :param args:
