@@ -66,6 +66,6 @@ class API(bottle.Bottle):
 
     def undoc(self):
         """
-        Remove SwaggerUI documentation site for this API
+        Remove SwaggerUI documentation site for this API.
         """
         pass
