@@ -12,7 +12,7 @@ class API(bottle.Bottle):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.__bottle_route("/", "GET", lambda: bottle.template()) # route root to swagger ui
+        self.__bottle_route("/", "GET", lambda: "")#bottle.template()) # route root to swagger ui
 
     def __bottle_route(self, *args, **kwargs):
         """
@@ -30,7 +30,7 @@ class API(bottle.Bottle):
         return json.dumps(dict(error=res.body, status_code=res.status_code))
 
     def mount(self, prefix, app, **kwargs):
-        '''
+        """
         Mount an application (:class:`API` or :class:`bottle.Bottle`)
         to a specific URL prefix. Example::
 
@@ -39,7 +39,7 @@ class API(bottle.Bottle):
         :param prefix: path prefix or `mount-point`. If it ends in a slash,
             that slash is mandatory.
         :param app: an instance of :class:`API` or :class:`bottle.Bottle`.
-        '''
+        """
         self.undoc()
         return super().mount(prefix, app, **kwargs)
 
@@ -55,11 +55,9 @@ class API(bottle.Bottle):
         # wrapper needed to pass arguments to decorator
         def wrapper(cls):
             instance = cls() # acts similar to a singleton
-            self.__bottle_route(path, "GET", instance.get, **kwargs)
-            self.__bottle_route(path, "POST", instance.post, **kwargs)
-            self.__bottle_route(path, "PUT", instance.put, **kwargs)
-            self.__bottle_route(path, "DELETE", instance.delete, **kwargs)
-            self.__bottle_route(path, "PATCH", instance.patch, **kwargs)
+            for method in "get", "post", "put", "delete", "patch":
+                if attr := getattr(instance, method, None):
+                    self.__bottle_route(path, method.upper(), attr, **kwargs)
             return cls
         
         return wrapper
@@ -68,4 +66,9 @@ class API(bottle.Bottle):
         """
         Remove SwaggerUI documentation site for this API.
         """
+        if "/" in self.router.builder.keys():
+            del self.router.builder["/"]
+        if "/" in self.router.static["GET"].keys():
+            del self.router.static["GET"]["/"]
+        del self.routes[0]
         pass

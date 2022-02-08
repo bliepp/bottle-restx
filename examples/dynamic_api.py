@@ -21,6 +21,8 @@ class TestResource(Resource):
         return {"msg": f"This is a response to a PUT request on resource {id}."}
     def delete(self, id: int):
         return {"msg": f"This is a response to a DELETE request on resource {id}."}
+    def patch(self, id: int):
+        return {"msg": f"This is a response to a PATCH request on resource {id}."}
 
 
 if __name__ == "__main__":

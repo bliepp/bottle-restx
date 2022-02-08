@@ -24,6 +24,8 @@ class TestResource(Resource):
         return {"msg": "This is a response to a PUT request."}
     def delete(self):
         return {"msg": "This is a response to a DELETE request."}
+    def patch(self):
+        return {"msg": "This is a response to a PATCH request."}
 
 @app.route("/")
 def index():
