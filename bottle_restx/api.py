@@ -6,8 +6,7 @@ import json
 class API(bottle.Bottle):
     """
     A child of :class:`bottle.Bottle` with members to handle
-    :class:`Resource` classes using the decorator
-    :meth:`resource`.
+    :class:`Resource` classes using the decorator :meth:`route`.
     """
 
     def __init__(self, *args, **kwargs):

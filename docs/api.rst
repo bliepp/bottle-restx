@@ -1,7 +1,7 @@
+.. currentmodule:: bottle_restx
+
 API
 ===
-
-.. currentmodule:: bottle_restx
 
 Core
 ----
