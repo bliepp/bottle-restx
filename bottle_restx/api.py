@@ -5,9 +5,9 @@ import json
 
 class API(bottle.Bottle):
     """
-    A child of :py:class:`bottle.Bottle` with members to handle
-    :py:class:`Resource` classes using the decorator
-    :py:meth:`resource`.
+    A child of :class:`bottle.Bottle` with members to handle
+    :class:`Resource` classes using the decorator
+    :meth:`resource`.
     """
 
     def __init__(self, *args, **kwargs):
@@ -36,16 +36,23 @@ class API(bottle.Bottle):
 
             api.mount('/other/', other_api)
 
-        :param prefix: path prefix or `mount-point`. If it ends in a slash,
-            that slash is mandatory.
-        :param app: an instance of :class:`API` or :class:`bottle.Bottle`.
+        Mounting an :class:`API` to another actually calls
+        :meth:`undoc` to make sure only the parent API uses
+        SwaggerUI. A mounted :class:`API` basically acts like a
+        namespace.
+
+        :param prefix:
+            path prefix or `mount-point`. If it ends in a slash, that
+            slash is mandatory.
+        :param app:
+            an instance of :class:`API` or :class:`bottle.Bottle`.
         """
         self.undoc()
         return super().mount(prefix, app, **kwargs)
 
     def route(self, path, **kwargs):
         """
-        A decorator for a :py:class:`Resource` class
+        A decorator for a :class:`Resource` class
         to make it available at a specific route.
         """
         # ignore path and method keywords as they are set in the wrapper 
@@ -64,7 +71,7 @@ class API(bottle.Bottle):
 
     def undoc(self):
         """
-        Remove SwaggerUI documentation site for this API.
+        Remove SwaggerUI documentation site for the API this is called on.
         """
         if "/" in self.router.builder.keys():
             del self.router.builder["/"]

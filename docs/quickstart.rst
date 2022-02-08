@@ -4,8 +4,8 @@ Quickstart
 RESTful basics
 --------------
 
-:py:mod:`bottle-restx` is, as the name suggests, loosely inspired by
-the syntax of :py:mod:`flask-restx`. RESTful APIs are based on
+:mod:`bottle-restx` is, as the name suggests, loosely inspired by
+the syntax of :mod:`flask-restx`. RESTful APIs are based on
 resources. This means that every resource is tied to a specific route
 and depending on the HTTP method different tasks can be performed on
 them.
@@ -26,11 +26,11 @@ Using bottle-restx
 ------------------
 
 This package uses a class based approach as every resource is a
-dedicated class inheriting from :py:class:`bottle_restx.Resource`.
+dedicated class inheriting from :class:`bottle_restx.Resource`.
 The individual endpoints are implemented via member functions named
 like the method they are supposed to map to. If a resource needs a GET
 endpoint the class gets a :code:`get` method serving this purpose.
-Using the :py:meth:`bottle_restx.API.resource` decorator serves this
+Using the :meth:`bottle_restx.API.resource` decorator serves this
 purpose.
 
 .. code-block::
