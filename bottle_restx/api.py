@@ -10,6 +10,10 @@ class API(bottle.Bottle):
     :py:meth:`resource`.
     """
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__bottle_route("/", "GET", lambda: bottle.template()) # route root to swagger ui
+
     def __bottle_route(self, *args, **kwargs):
         """
         Get bottle's route method to make room for the resources class
@@ -24,7 +28,21 @@ class API(bottle.Bottle):
         """
         bottle.response.content_type = "application/json"
         return json.dumps(dict(error=res.body, status_code=res.status_code))
-    
+
+    def mount(self, prefix, app, **kwargs):
+        '''
+        Mount an application (:class:`API` or :class:`bottle.Bottle`)
+        to a specific URL prefix. Example::
+
+            api.mount('/other/', other_api)
+
+        :param prefix: path prefix or `mount-point`. If it ends in a slash,
+            that slash is mandatory.
+        :param app: an instance of :class:`API` or :class:`bottle.Bottle`.
+        '''
+        self.undoc()
+        return super().mount(prefix, app, **kwargs)
+
     def route(self, path, **kwargs):
         """
         A decorator for a :py:class:`Resource` class
@@ -45,18 +63,8 @@ class API(bottle.Bottle):
         
         return wrapper
 
-    def mount(self, prefix, app, **kwargs):
-        '''
-        Mount an application (:class:`API` or :class:`bottle.Bottle`)
-        to a specific URL prefix. Example::
-
-            api.mount('/other/', other_api)
-
-        :param prefix: path prefix or `mount-point`. If it ends in a slash,
-            that slash is mandatory.
-        :param app: an instance of :class:`API` or :class:`bottle.Bottle`.
-        '''
-        # TODO: Check if mounted app is API, too if so: remove all
-        # swagger data since it gets merged into this app, like
-        # namespaces with flask-restx
-        return super().mount(prefix, app, **kwargs)
+    def undoc(self):
+        """
+        Remove SwaggerUI documentation site for this API
+        """
+        pass
