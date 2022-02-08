@@ -44,3 +44,9 @@ class Resource():
         The endpoint for the DELETE request.
         """
         bottle.abort(405)
+
+    def patch(self, *args, **kwargs):
+        """
+        The endpoint for the PATCH request.
+        """
+        bottle.abort(405)

@@ -59,6 +59,7 @@ class API(bottle.Bottle):
             self.__bottle_route(path, "POST", instance.post, **kwargs)
             self.__bottle_route(path, "PUT", instance.put, **kwargs)
             self.__bottle_route(path, "DELETE", instance.delete, **kwargs)
+            self.__bottle_route(path, "PATCH", instance.patch, **kwargs)
             return cls
         
         return wrapper
