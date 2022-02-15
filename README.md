@@ -8,7 +8,7 @@ $ pip install bottle-restx
 ```
 
 ## Quickstart
-The syntax is class based. Create an `API` object, which is a subclass of `bottle.Bottle`. For eevry resource add a subclass of the `Resource` class and decorate it with the `API.route` decorator. The route is passed to the method fitting the HTTP method.
+The syntax is class based. Create an `API` object, which is a subclass of `bottle.Bottle`. For every resource add a subclass of the `Resource` class and decorate it with the `API.route` decorator. The route is passed to the method fitting the HTTP method.
 ```python
 from bottle_restx import API, Resource
 api = API()
