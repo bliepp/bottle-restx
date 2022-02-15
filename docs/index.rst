@@ -11,9 +11,11 @@ Loosely inspired by flask-restx.
 
 Installation
 ============
-Right now you cannot install bottle-restx with pip. You need to
-manually copy it into your project folder or use this repo as a
-git submodule.
+Use :code:`pip` to install the package:
+
+.. code-block:: console
+
+   $ pip install bottle-restx
 
 
 Documentation
