@@ -1,6 +1,49 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+__author__ = 'bliepp'
+__version__ = '0.5.0'
+__license__ = 'MIT'
+
+
 import bottle
 import json
 
+
+
+
+
+
+###############################################################################
+# Resource Object ##############################################################
+###############################################################################
+
+
+class Resource():
+    """
+    This class is intended to be derived from and used with the
+    :meth:`API.route` decorator. A resource in REST can be
+    thought of as a route whose meaning depends on the request method.
+    For example: to define what should happen when requesting with
+    GET, set the :meth:`get` method.
+
+    .. note::
+
+       A route :code:`/my/route/<value>` in :meth:`API.route` will
+       produce an argument :code:`value` to be passed to the endpoints
+       via their :code:`*args` parameter. The parameters
+       :code:`**kwargs` are directly passed from :meth:`API.route`.
+    """
+    pass # right now empty as it is solely used for type checking
+
+
+
+
+
+
+###############################################################################
+# API Object ###################################################################
+###############################################################################
 
 
 class API(bottle.Bottle):
@@ -11,7 +54,7 @@ class API(bottle.Bottle):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.__bottle_route("/", "GET", lambda: "")#bottle.template()) # route root to swagger ui
+        self.__bottle_route("/", "GET", lambda: "") # route root to swagger ui
 
     def __bottle_route(self, *args, **kwargs):
         """
@@ -38,7 +81,7 @@ class API(bottle.Bottle):
         Mounting an :class:`API` to another actually calls
         :meth:`undoc` to make sure only the parent API uses
         SwaggerUI. A mounted :class:`API` basically acts like a
-        namespace.
+        namespace in flask-restx.
 
         :param prefix:
             path prefix or `mount-point`. If it ends in a slash, that
