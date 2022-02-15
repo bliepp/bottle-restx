@@ -6,7 +6,6 @@ by the syntax of the flask-restx package.
 """
 
 from bottle_restx import API, Resource
-import bottle
 
 
 app = API()
