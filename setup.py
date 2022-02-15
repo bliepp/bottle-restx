@@ -13,9 +13,12 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/bliepp/bottle-restx",
-    #packages=setuptools.find_packages(),
+    project_urls={
+        "Bug Tracker": "https://github.com/bliepp/bottle-restx/issues",
+    },
     py_modules=['bottle_restx'],
     #scripts=['bottle_restx.py'],
+    #packages=setuptools.find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
         "Topic :: Software Development :: Libraries :: Python Modules",
