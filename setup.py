@@ -1,18 +1,21 @@
 import setuptools
+import bottle_restx
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="flask-restx",
-    version="0.5.0",
-    author="bliepp",
+    name="bottle-restx",
+    version=bottle_restx.__version__,
+    author=bottle_restx.__author__,
     #author_email="author@example.com",
     description="A simple resource based REST API extension for the bottle framework",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/bliepp/bottle-restx",
-    packages=setuptools.find_packages(),
+    #packages=setuptools.find_packages(),
+    py_modules=['bottle_restx'],
+    #scripts=['bottle_restx.py'],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Topic :: Software Development :: Libraries :: Python Modules",

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 __author__ = 'bliepp'
-__version__ = '0.5.0'
+__version__ = '1.0.0'
 __license__ = 'MIT'
 
 

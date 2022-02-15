@@ -2,3 +2,4 @@ sphinx
 setuptools
 wheel
 twine
+build
