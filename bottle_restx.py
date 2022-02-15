@@ -71,17 +71,17 @@ class API(bottle.Bottle):
         bottle.response.content_type = "application/json"
         return json.dumps(dict(error=res.body, status_code=res.status_code))
 
-    def mount(self, prefix, app, **kwargs):
+    def mount(self, prefix, app: "API", **kwargs):
         """
-        Mount an application (:class:`API` or :class:`bottle.Bottle`)
-        to a specific URL prefix. Example::
+        Mount an application :class:`API` to a specific URL prefix.
+        Example::
 
-            api.mount('/other/', other_api)
+            parent_api.mount('/other/', child_api)
 
         Mounting an :class:`API` to another actually calls
-        :meth:`undoc` to make sure only the parent API uses
-        SwaggerUI. A mounted :class:`API` basically acts like a
-        namespace in flask-restx.
+        :meth:`undoc` on the mounted child object to make sure
+        only the parent API uses SwaggerUI. A mounted :class:`API`
+        basically acts like a namespace in flask-restx.
 
         :param prefix:
             path prefix or `mount-point`. If it ends in a slash, that
@@ -89,7 +89,9 @@ class API(bottle.Bottle):
         :param app:
             an instance of :class:`API` or :class:`bottle.Bottle`.
         """
-        self.undoc()
+        if not isinstance(app, API):
+            raise TypeError("Only bbjects of type bottle_restx.API are mountable.")
+        app.undoc()
         return super().mount(prefix, app, **kwargs)
 
     def route(self, path, **kwargs):
