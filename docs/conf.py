@@ -13,13 +13,16 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
+import bottle_restx
 
 
 # -- Project information -----------------------------------------------------
 
 project = 'bottle-restx'
-copyright = '2022, bliepp'
-author = 'bliepp'
+author = bottle_restx.__author__
+copyright = '2022, ' + author
+version = ".".join(bottle_restx.__version__.split(".")[:2])
+release = bottle_restx.__version__
 
 
 # -- General configuration ---------------------------------------------------
@@ -29,8 +32,15 @@ author = 'bliepp'
 # ones.
 extensions = [
     "sphinx.ext.autodoc",
+    "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
 ]
+
+# intersphinx
+intersphinx_mapping = {
+    'python': ('http://docs.python.org/', None),
+    'bottle': ('https://bottlepy.org/docs/stable/', None),
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

@@ -1,16 +1,18 @@
-.. currentmodule:: bottle_restx
+.. module:: bottle_restx
+   :platform: Unix, Windows
+   :synopsis: Bottle framework extension
+.. moduleauthor:: bliepp
 
 API
 ===
 
-Core
-----
+The :class:`API` Class
+----------------------
 .. autoclass:: API
    :members:
 
-Resource
---------
-
+The :class:`Resource` Class
+---------------------------
 .. autoclass:: Resource
    :members:
    :inherited-members:
