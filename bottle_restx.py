@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 __author__ = 'bliepp'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __license__ = 'MIT'
 
 
@@ -99,8 +99,7 @@ class API(bottle.Bottle):
         A decorator for a :class:`Resource` class
         to make it available at a specific route.
         """
-        # ignore path and method keywords as they are set in the wrapper 
-        kwargs.pop("path", None)
+        # ignore method keyword as it is set implicitly in the wrapper
         kwargs.pop("method", None)
 
         # wrapper needed to pass arguments to decorator
