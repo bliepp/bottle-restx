@@ -87,7 +87,7 @@ class API(bottle.Bottle):
             path prefix or `mount-point`. If it ends in a slash, that
             slash is mandatory.
         :param app:
-            an instance of :class:`API` or :class:`bottle.Bottle`.
+            an instance of :class:`API`.
         """
         if not isinstance(app, API):
             raise TypeError("Only bbjects of type bottle_restx.API are mountable.")
@@ -104,6 +104,8 @@ class API(bottle.Bottle):
 
         # wrapper needed to pass arguments to decorator
         def wrapper(cls):
+            # TODO: type checking if cls is actually a subclass
+            # of Resource using issubclass(cls, Resource)
             instance = cls() # acts similar to a singleton
             for method in "get", "post", "put", "delete", "patch":
                 if method_func := getattr(instance, method, None):
