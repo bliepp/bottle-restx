@@ -54,12 +54,12 @@ class API(bottle.Bottle):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.__bottle_route("/", "GET", lambda: "") # route root to swagger ui
+        self.function_route("/", "GET", lambda: "") # route root to swagger ui
 
-    def __bottle_route(self, *args, **kwargs):
+    def function_route(self, *args, **kwargs):
         """
-        Get bottle's route method to make room for the resources class
-        decorator to be named route as well.
+        Get bottle's classic route method to make room for the resources class
+        decorator to be named route as well. This is a decorator for functions.
         """
         super().route(*args, **kwargs)
 
@@ -108,7 +108,7 @@ class API(bottle.Bottle):
             instance = cls() # acts similar to a singleton
             for method in "get", "post", "put", "delete", "patch":
                 if method_func := getattr(instance, method, None):
-                    self.__bottle_route(path, method.upper(), method_func, **kwargs)
+                    self.function_route(path, method.upper(), method_func, **kwargs)
             return cls
         
         return wrapper
