@@ -3,10 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to bottle-restx's documentation
-=======================================
+Welcome to bottle-restx's documentation!
+========================================
 A simple resource based REST API extension for the bottle framework.
-Loosely inspired by flask-restx.
+Loosely inspired by `flask-restx <https://flask-restx.readthedocs.io/en/latest/>`_.
 
 
 Installation
